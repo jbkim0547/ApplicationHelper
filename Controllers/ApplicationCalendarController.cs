@@ -34,5 +34,22 @@ namespace ApplicationHelper.Controllers
             return (Ok());
         }
 
+        [HttpDelete("{id}")]
+        public async Task <IActionResult> DeleteInterviewNote(string id)
+        {
+            var interviewNote = await _context.Interviews.FirstOrDefaultAsync(e => e.id == id);
+            if(interviewNote == null)
+            {
+                return NotFound();
+            }
+
+
+            _context.Interviews.Remove(interviewNote);
+            await _context.SaveChangesAsync();
+
+            return (Ok());
+
+        }
+
     }
 }
