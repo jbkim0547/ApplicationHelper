@@ -51,5 +51,19 @@ namespace ApplicationHelper.Controllers
 
         }
 
+        [HttpGet("{id}")]
+        public async Task <IActionResult> GetInterviewNoteById(string id)
+        {
+            var interviewNote = await _context.Interviews.FirstOrDefaultAsync(e => e.id == id);
+            if(interviewNote == null)
+            {
+                return NotFound();
+            }
+
+
+            return Ok(interviewNote);
+
+        }
+
     }
 }
