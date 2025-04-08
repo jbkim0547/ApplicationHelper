@@ -6,7 +6,7 @@ namespace ApplicationHelper.Database
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(option) { }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
         
         public DbSet<InterviewNote> Interviews { get; set; }
         
