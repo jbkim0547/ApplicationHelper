@@ -22,7 +22,7 @@ namespace ApplicationHelper.Controllers
         {
             var interviewNote = await _context.Interviews.ToListAsync();
             
-            return Ok(interviewNote);
+            return Ok(interviewNote);   
         }
 
 
