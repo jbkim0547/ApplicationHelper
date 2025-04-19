@@ -27,7 +27,7 @@ namespace ApplicationHelper.Controllers
         public async Task<IActionResult> addDuringInterviewNote(DuringInterviewNote duringInterviewNote)
         {
 
-            _context.DuringInterview.Add(duringInterviewNote);
+            _context.DuringInterview.Add(duringInterviewNote
             await _context.SaveChangesAsync();
 
             return Ok(duringInterviewNote);
