@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace ApplicationHelper.Controllers
+namespace ApplicationHelper.Controlle
 {
     [Route("api/interviewNote")]
     [ApiController]
