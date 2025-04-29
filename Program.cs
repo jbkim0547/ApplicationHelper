@@ -18,7 +18,15 @@ builder.Services.AddControllers().AddNewtonsoftJson(options => options.Serialize
 //Database
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationCountingDBCon")));
 
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = "localhost:6379";
+    options.InstanceName = "ApplicationHelper:";
+});
+
 var app = builder.Build();
+
+
 
 //Enable CORS
 app.UseCors(c=> c.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
