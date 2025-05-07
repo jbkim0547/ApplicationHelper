@@ -31,7 +31,7 @@ namespace ApplicationHelper.Controllers
         {
             _context.Interviews.Add(interview);
             await _context.SaveChangesAsync();
-            return (Ok());
+            return Ok();
         }
 
         [HttpDelete("{id}")]
