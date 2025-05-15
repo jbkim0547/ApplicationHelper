@@ -1,6 +1,6 @@
 ﻿using ApplicationHelper.Database;
 using ApplicationHelper.Models;
-usi Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using System.Text.Json;
