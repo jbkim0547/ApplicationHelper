@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace ApplicationHelper.Controllers
 {
-    [Route("api/duringInterviewNote")
+    [Route("api/duringInterviewNote")]
     [ApiController]
     public class DuringInterviewNoteController : ControllerBase
     {
