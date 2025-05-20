@@ -12,6 +12,7 @@ namespace ApplicationHelper.Database
         public DbSet<InterviewNote> Interviews { get; set; }
         public DbSet<DuringInterviewNote> DuringInterview { get; set; }
         public DbSet<ApplicationCount> ApplicationCount { get; set; }
+        public DbSet<User> Users { get; set; }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
