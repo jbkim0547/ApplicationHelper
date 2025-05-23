@@ -20,17 +20,18 @@ namespace ApplicationHelper.Controllers
 
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] LoginRequest loginRequest)
+        public async Task<IActionResult> Register([FromBody] RegisterRequest registerRequest)
         {
-            if(_context.Users.Any(u => u.Email == loginRequest.Email)) 
+            if(_context.Users.Any(u => u.Email == registerRequest.Email)) 
             {
                 return BadRequest();
             };
 
             var user = new User
             {
-                Email = loginRequest.Email,
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword(loginRequest.Password)
+                Email = registerRequest.Email,
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerRequest.Password),
+                Name = registerRequest.Name,
             };
 
             _context.Users.Add(user);
