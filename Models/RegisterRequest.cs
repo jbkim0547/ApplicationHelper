@@ -2,13 +2,12 @@
 
 namespace ApplicationHelper.Models
 {
-    public class User
+    public class RegisterRequest
     {
-        public int Id { get; set; }
         [Required]
         public string Email { get; set; }
         [Required]
-        public string PasswordHash { get; set; }
+        public string Password { get; set; }
         public string Name { get; set; }
     }
 }
