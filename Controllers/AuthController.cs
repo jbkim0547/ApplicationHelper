@@ -4,6 +4,10 @@ using BCrypt.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace ApplicationHelper.Controllers
 {
@@ -24,7 +28,7 @@ namespace ApplicationHelper.Controllers
         {
             if(_context.Users.Any(u => u.Email == registerRequest.Email)) 
             {
-                return BadRequest();
+                return BadRequest("Email already exists");
             };
 
             var user = new User
@@ -49,7 +53,25 @@ namespace ApplicationHelper.Controllers
                 return Unauthorized("Invalid Credential");
             }
 
-            return Ok(new {message = "Login Successful", user.Email});
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.UTF8.GetBytes("SecretKeyforJWTbearer");
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                    new Claim(ClaimTypes.Email, user.Email)
+                }),
+                Expires = DateTime.UtcNow.AddHours(1),
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var jwt = tokenHandler.WriteToken(token);
+
+            return Ok(new {token = jwt });
         }
     }
 }
