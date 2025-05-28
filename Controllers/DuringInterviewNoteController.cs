@@ -1,12 +1,15 @@
 ﻿using ApplicationHelper.Database;
 using ApplicationHelper.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
+using System.Security.Claims;
 using System.Text.Json;
 
 namespace ApplicationHelper.Controllers
 {
+    [Authorize]
     [Route("api/duringInterviewNote")]
     [ApiController]
     public class DuringInterviewNoteController : ControllerBase
@@ -22,6 +25,9 @@ namespace ApplicationHelper.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllDuringInterviewNote()
         {
+
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
             var cacheKey = "allDuringInterviewNotesList";
 
             var cachedData = await _cache.GetStringAsync(cacheKey);
@@ -34,7 +40,9 @@ namespace ApplicationHelper.Controllers
             }
 
             Console.WriteLine("Cache miss - Fetching from Database");
-            var duringInterviewNote = await _context.DuringInterview.ToListAsync();
+            var duringInterviewNote = await _context.DuringInterview
+                .Where(n=> n.Id == userId)
+                .ToListAsync();
 
             var serializedData = JsonSerializer.Serialize(duringInterviewNote);
             await _cache.SetStringAsync(cacheKey, serializedData, new DistributedCacheEntryOptions
@@ -48,7 +56,9 @@ namespace ApplicationHelper.Controllers
         [HttpPost]
         public async Task<IActionResult> addDuringInterviewNote(DuringInterviewNote duringInterviewNote)
         {
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
+            duringInterviewNote.UserId = userId;
             _context.DuringInterview.Add(duringInterviewNote);
             await _context.SaveChangesAsync();
 
