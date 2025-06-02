@@ -2,7 +2,7 @@
 
 namespace ApplicationHelper.Models
 {
-    public class ApplicationCount;;;;
+    public class ApplicationCount
     {
         
         public int Id { get; set; }
