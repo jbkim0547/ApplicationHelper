@@ -22,13 +22,15 @@ namespace ApplicationHelper.Controllers
             _cache = cache;
             _context = context;
         }
+        
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAllDuringInterviewNote()
         {
 
             var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-
-            var cacheKey = "allDuringInterviewNotesList";
+            Console.WriteLine(userId);
+            var cacheKey = $"allDuringInterviewNotesList_{userId}";
 
             var cachedData = await _cache.GetStringAsync(cacheKey);
 
@@ -41,7 +43,7 @@ namespace ApplicationHelper.Controllers
 
             Console.WriteLine("Cache miss - Fetching from Database");
             var duringInterviewNote = await _context.DuringInterview
-                .Where(n=> n.Id == userId)
+                .Where(n=> n.UserId == userId)
                 .ToListAsync();
 
             var serializedData = JsonSerializer.Serialize(duringInterviewNote);
@@ -54,10 +56,11 @@ namespace ApplicationHelper.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> addDuringInterviewNote(DuringInterviewNote duringInterviewNote)
         {
             var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-
+            Console.WriteLine(userId);
             duringInterviewNote.UserId = userId;
             _context.DuringInterview.Add(duringInterviewNote);
             await _context.SaveChangesAsync();

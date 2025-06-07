@@ -35,7 +35,7 @@ namespace ApplicationHelper.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task <IActionResult> DeleteInterviewNote(string id)
+        public async Task <IActionResult> DeleteInterviewNote(int id)
         {
             var interviewNote = await _context.Interviews.FirstOrDefaultAsync(e => e.id == id);
             if(interviewNote == null)
@@ -52,7 +52,7 @@ namespace ApplicationHelper.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task <IActionResult> GetInterviewNoteById(string id)
+        public async Task <IActionResult> GetInterviewNoteById(int id)
         {
             var interviewNote = await _context.Interviews.FirstOrDefaultAsync(e => e.id == id);
             if(interviewNote == null)
