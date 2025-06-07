@@ -54,7 +54,7 @@ namespace ApplicationHelper.Controllers
             }
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes("SecretKeyforJWTbearer");
+            var key = Encoding.UTF8.GetBytes("SecretKeyforJWTbearerForApplicationHelperApp");
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
