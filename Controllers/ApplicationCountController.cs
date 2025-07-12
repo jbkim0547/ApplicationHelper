@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 
-namespace ApplicationHelper.Controllerss
+namespace ApplicationHelper.Controllers
 {
     [Route("api/applicationCount")]
     [ApiController]
