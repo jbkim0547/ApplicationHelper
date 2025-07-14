@@ -1,7 +1,7 @@
 ﻿using ApplicationHelper.Database;
 using ApplicationHelper.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 
 namespace ApplicationHelper.Controllers
