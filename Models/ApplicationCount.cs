@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ApplicationHelper.Modelsss
+namespace ApplicationHelper.Models
 {
     public class ApplicationCount
     {
