@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ApplicationHelper.Domain
+namespace ApplicationHelper.Domainn
 {
     public class Calendar
     {
