@@ -3,7 +3,7 @@ using ApplicationHelper.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 
-namespace ApplicationHelper.Database
+namespace ApplicationHelper.Database;
 {
     public class AppDbContext : DbContext
     {
